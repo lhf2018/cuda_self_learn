@@ -3,7 +3,7 @@ project(cuda_learn CUDA)
 
 set(CMAKE_CUDA_STANDARD 14)
 
-add_executable(cuda_learn start/main.cu)
+add_executable(cuda_learn vector_add/main.cu)
 
 set_target_properties(cuda_learn PROPERTIES
         CUDA_SEPARABLE_COMPILATION ON)

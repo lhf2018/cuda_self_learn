@@ -4,7 +4,7 @@
 
 #define  N 65535
 
-__global__ void vector_add_gpu_3(int *a, int *b, int *c, int n){
+__global__ void vector_add_gpu(int *a, int *b, int *c, int n){
     int tid = blockIdx.x * blockDim.x + threadIdx.x; // 获取线程索引
     const int t_n = gridDim.x * blockDim.x; // 跳步的步长，所有线程的数量
 
@@ -35,7 +35,7 @@ int main() {
     cudaMalloc(&dev_c, sizeof(int) * N);
     cudaMemcpy(dev_c, c, sizeof(int) * N, cudaMemcpyHostToDevice);
 
-    vector_add_gpu_3<<<100, 200>>>(dev_a, dev_b, dev_c, N);
+    vector_add_gpu<<<100, 200>>>(dev_a, dev_b, dev_c, N);
     cudaMemcpy(c, dev_c, sizeof(int) * N, cudaMemcpyDeviceToHost);
 
     end=clock();
